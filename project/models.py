@@ -27,7 +27,7 @@ class Movie(models.Base):
     genre_id = Column(Integer, ForeignKey(f"{Genre.__tablename__}.id"), nullable=False)
     director_id = Column(Integer, ForeignKey(f"{Director.__tablename__}.id"), nullable=False)
     genre = relationship("Genre")
-    directors = relationship("Director")
+    director = relationship("Director")
 
 
 class User(models.Base):
