@@ -2,7 +2,6 @@ from flask import request
 from flask_restx import Namespace, Resource
 
 from project.container import user_service
-from project.setup.api.models import user
 
 api = Namespace('auth')
 

@@ -6,7 +6,6 @@ from werkzeug.exceptions import NotFound
 
 from project.dao.base import BaseDAO, T
 from project.models import Genre, User, Director, Movie
-from project.tools.security import generate_password_hash
 
 
 class GenresDAO(BaseDAO[Genre]):
