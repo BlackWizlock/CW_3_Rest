@@ -6,6 +6,7 @@ from werkzeug.exceptions import NotFound
 
 from project.dao.base import BaseDAO, T
 from project.models import Genre, User, Director, Movie
+from project.tools.security import generate_password_hash
 
 
 class GenresDAO(BaseDAO[Genre]):
@@ -14,6 +15,30 @@ class GenresDAO(BaseDAO[Genre]):
 
 class UsersDAO(BaseDAO[Genre]):
     __model__ = User
+
+    def create_user(self, email, password):
+        user = User(email=email, password=password)
+        try:
+            self._db_session.add(user)
+            self._db_session.commit()
+            print("User created")
+            return user
+        except Exception as e:
+            self._db_session.rollback()
+            print(e)
+
+    def get_user_by_email(self, email):
+        return self._db_session.query(self.__model__).filter(self.__model__.email == email).one()
+
+    def update_user(self, data, email):
+        try:
+            self._db_session.query(self.__model__).filter(self.__model__.email == email).update(data)
+            self._db_session.commit()
+            print("User updated")
+        except Exception as e:
+            print("Something goes wrong")
+            print(e)
+            self._db_session.rollback()
 
 
 class DirectorsDAO(BaseDAO[Genre]):

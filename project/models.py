@@ -19,9 +19,9 @@ class Director(models.Base):
 class Movie(models.Base):
     __tablename__ = 'movies'
 
-    title = Column(String(100))
-    description = Column(String(100))
-    trailer = Column(String(100))
+    title = Column(String(100), nullable=False)
+    description = Column(String(100), nullable=False)
+    trailer = Column(String(100), nullable=False)
     year = Column(Integer, nullable=False)
     rating = Column(Float, nullable=False)
     genre_id = Column(Integer, ForeignKey(f"{Genre.__tablename__}.id"), nullable=False)
@@ -36,4 +36,4 @@ class User(models.Base):
     password = Column(String(300), nullable=False)
     name = Column(String(100))
     surname = Column(String(100))
-    favourite_genre = Column(Integer, ForeignKey(f"{Genre.__tablename__}.id"), nullable=False)
+    favourite_genre = Column(Integer, ForeignKey(f"{Genre.__tablename__}.id"))

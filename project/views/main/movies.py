@@ -16,9 +16,7 @@ class MoviesView(Resource):
         """
         Get all movies.
         """
-
         status = request.args.get('status')
-
         return movie_service.get_all(filter=status,**page_parser.parse_args())
 
 
